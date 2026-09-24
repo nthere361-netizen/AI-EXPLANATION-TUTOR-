@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#0d9488" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#grad)" />
+  <!-- Graduation / Understanding Cap & Compass Rays -->
+  <path d="M32 14L50 24L32 34L14 24L32 14Z" fill="#ffffff" />
+  <path d="M20 28V38C20 44 26 48 32 48C38 44 44 48 44 38V28" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="32" cy="38" r="3" fill="#38bdf8" />
+</svg>

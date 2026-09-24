@@ -9,13 +9,10 @@ import {
   CheckCircle, 
   ArrowRight, 
   Trash2, 
-  Clock, 
-  HardDrive, 
   BookOpen, 
   AlertCircle,
   FileCode,
-  Loader2,
-  FileCheck
+  Loader2
 } from 'lucide-react';
 
 interface MyMaterialsViewProps {
@@ -189,16 +186,16 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
   return (
     <div className="w-full max-w-5xl mx-auto space-y-6">
       {/* Header & Flow Indicator */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-slate-800 shadow-xs">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-indigo-50 text-indigo-700 border border-indigo-100">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800/60">
               Personal Study Vault
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 mt-2 tracking-tight">
               My Study Materials
             </h1>
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
               Upload your textbook chapters, PDFs, lecture slides, or notes to extract mental models and trigger deep tutoring.
             </p>
           </div>
@@ -209,7 +206,7 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
                 setModalError(null);
                 setShowPasteModal(true);
               }}
-              className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
+              className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors"
             >
               Paste Raw Notes
             </button>
@@ -219,21 +216,21 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
         {/* Visual Flow: UPLOAD → ANALYZE → UNDERSTAND → LEARN */}
         <div className="mt-6 pt-2">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
-            <div className="p-2.5 rounded-xl bg-indigo-50/60 border border-indigo-100">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 block">Step 1</span>
-              <span className="text-xs font-bold text-slate-800">UPLOAD</span>
+            <div className="p-2.5 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block">Step 1</span>
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">UPLOAD</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-purple-50/60 border border-purple-100">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600 block">Step 2</span>
-              <span className="text-xs font-bold text-slate-800">ANALYZE</span>
+            <div className="p-2.5 rounded-xl bg-purple-50/60 dark:bg-purple-950/40 border border-purple-100 dark:border-purple-900/50">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400 block">Step 2</span>
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">ANALYZE</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-teal-50/60 border border-teal-100">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-600 block">Step 3</span>
-              <span className="text-xs font-bold text-slate-800">DECOMPOSE</span>
+            <div className="p-2.5 rounded-xl bg-teal-50/60 dark:bg-teal-950/40 border border-teal-100 dark:border-teal-900/50">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 block">Step 3</span>
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">DECOMPOSE</span>
             </div>
-            <div className="p-2.5 rounded-xl bg-emerald-50/60 border border-emerald-100">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 block">Step 4</span>
-              <span className="text-xs font-bold text-slate-800">TUTOR</span>
+            <div className="p-2.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-900/50">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 block">Step 4</span>
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">TUTOR</span>
             </div>
           </div>
         </div>
@@ -244,7 +241,7 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
         {/* Left Column: Upload Box & List */}
         <div className="lg:col-span-5 space-y-4">
           {/* Real Upload Dropzone */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-dashed border-slate-300 hover:border-indigo-400 transition-all text-center group relative overflow-hidden">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-400 dark:hover:border-indigo-500 transition-all text-center group relative overflow-hidden">
             <input
               type="file"
               accept=".pdf,.txt,.md,.py,.js,.ts,.java,.cpp,.c,.json,.csv,.html"
@@ -258,28 +255,28 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
             />
             
             <div className="flex flex-col items-center">
-              <div className="p-3 rounded-2xl bg-indigo-50 text-indigo-600 group-hover:scale-105 transition-transform mb-3">
+              <div className="p-3 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 group-hover:scale-105 transition-transform mb-3">
                 <UploadCloud className="w-6 h-6" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 mb-1">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-1">
                 Drop your syllabus, PDF, or notes
               </h3>
-              <p className="text-xs text-slate-500 mb-3 max-w-xs">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mb-3 max-w-xs">
                 Supports PDF, Markdown, text, and code files up to 10MB
               </p>
-              <span className="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200">
+              <span className="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
                 Browse Files
               </span>
             </div>
 
             {/* Active processing state indicator */}
             {isProcessing && (
-              <div className="absolute inset-0 bg-white/95 backdrop-blur-xs flex flex-col items-center justify-center p-4 z-20">
-                <Loader2 className="w-7 h-7 text-indigo-600 animate-spin mb-2" />
-                <p className="text-xs font-bold text-slate-800 text-center">
+              <div className="absolute inset-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs flex flex-col items-center justify-center p-4 z-20">
+                <Loader2 className="w-7 h-7 text-indigo-600 dark:text-indigo-400 animate-spin mb-2" />
+                <p className="text-xs font-bold text-slate-800 dark:text-slate-200 text-center">
                   {statusMessage || 'Analyzing Document...'}
                 </p>
-                <p className="text-[11px] text-slate-500 text-center mt-1">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center mt-1">
                   Extracting foundational concepts and questions
                 </p>
               </div>
@@ -288,15 +285,15 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
 
           {/* Error Banner */}
           {errorMessage && (
-            <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium flex items-start gap-2.5 animate-in fade-in">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+            <div className="p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-300 text-xs font-medium flex items-start gap-2.5 animate-in fade-in">
+              <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
               <div className="flex-1">
                 <p className="leading-relaxed">{errorMessage}</p>
                 <div className="flex items-center gap-3 mt-2">
                   {lastFailedFile && (
                     <button
                       onClick={() => handleFileSelection(lastFailedFile)}
-                      className="text-[11px] font-bold text-rose-900 bg-rose-100 hover:bg-rose-200 px-2.5 py-1 rounded-lg border border-rose-300 transition-colors"
+                      className="text-[11px] font-bold text-rose-900 dark:text-rose-200 bg-rose-100 dark:bg-rose-900/60 hover:bg-rose-200 dark:hover:bg-rose-900 px-2.5 py-1 rounded-lg border border-rose-300 dark:border-rose-700 transition-colors"
                     >
                       Retry Analysis
                     </button>
@@ -306,7 +303,7 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
                       setErrorMessage(null);
                       setLastFailedFile(null);
                     }}
-                    className="text-[11px] font-semibold text-rose-600 hover:underline"
+                    className="text-[11px] font-semibold text-rose-600 dark:text-rose-400 hover:underline"
                   >
                     Dismiss
                   </button>
@@ -316,15 +313,15 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
           )}
 
           {/* List of uploaded documents */}
-          <div className="bg-white rounded-2xl p-4 border border-slate-200/80 shadow-2xs space-y-2">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200/80 dark:border-slate-800 shadow-2xs space-y-2">
             <div className="flex items-center justify-between px-2 py-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Vault Documents ({materials.length})
               </span>
             </div>
 
             {materials.length === 0 ? (
-              <div className="py-8 text-center text-xs text-slate-400">
+              <div className="py-8 text-center text-xs text-slate-400 dark:text-slate-500">
                 No documents uploaded yet. Upload a syllabus or lecture note above.
               </div>
             ) : (
@@ -336,15 +333,15 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
                     onClick={() => setSelectedMaterial(mat)}
                     className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-start justify-between group ${
                       isSelected
-                        ? 'bg-indigo-50/80 border-indigo-300 ring-1 ring-indigo-400/30'
-                        : 'bg-white border-slate-200/80 hover:bg-slate-50 hover:border-slate-300'
+                        ? 'bg-indigo-50/80 dark:bg-indigo-950/60 border-indigo-300 dark:border-indigo-700 ring-1 ring-indigo-400/30'
+                        : 'bg-white dark:bg-slate-900 border-slate-200/80 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     <div className="flex items-start gap-2.5 flex-1 min-w-0 pr-2">
                       <div className={`p-2 rounded-lg shrink-0 mt-0.5 ${
-                        mat.type === 'pdf' ? 'bg-rose-50 text-rose-600' :
-                        mat.type === 'code' ? 'bg-purple-50 text-purple-600' :
-                        'bg-indigo-50 text-indigo-600'
+                        mat.type === 'pdf' ? 'bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400' :
+                        mat.type === 'code' ? 'bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400' :
+                        'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400'
                       }`}>
                         {mat.type === 'pdf' ? <FileText className="w-4 h-4" /> :
                          mat.type === 'code' ? <FileCode className="w-4 h-4" /> :
@@ -352,10 +349,10 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
                       </div>
 
                       <div className="min-w-0 flex-1">
-                        <h4 className="text-xs sm:text-sm font-bold text-slate-900 truncate">
+                        <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 truncate">
                           {mat.title}
                         </h4>
-                        <div className="flex items-center gap-2 text-[11px] text-slate-400 mt-0.5">
+                        <div className="flex items-center gap-2 text-[11px] text-slate-400 dark:text-slate-500 mt-0.5">
                           <span>{mat.size}</span>
                           <span>•</span>
                           <span>{mat.date}</span>
@@ -366,7 +363,7 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
                     <button
                       onClick={(e) => handleDeleteMaterial(mat.id, e)}
                       title="Remove from vault"
-                      className="opacity-0 group-hover:opacity-100 p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-all"
+                      className="opacity-0 group-hover:opacity-100 p-1 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/60 transition-all"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -380,21 +377,21 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
         {/* Right Column: Selected Material Curriculum Breakdown */}
         <div className="lg:col-span-7">
           {selectedMaterial ? (
-            <div className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/90 shadow-xs space-y-6">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-6">
               {/* Material Title and Tutor Action */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md border border-teal-200/60">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded-md border border-teal-200/60 dark:border-teal-800/60">
                     Extracted Curriculum
                   </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 mt-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-1">
                     {selectedMaterial.title}
                   </h3>
                 </div>
 
                 <button
                   onClick={() => onLearnFromTopic(selectedMaterial.recommendedQuestions[0] || selectedMaterial.title)}
-                  className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-1.5 shadow-sm shadow-indigo-200 transition-all hover:scale-102"
+                  className="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-1.5 shadow-sm shadow-indigo-200 dark:shadow-none transition-all hover:scale-102"
                 >
                   <Sparkles className="w-4 h-4" />
                   <span>Launch Tutor on Topic</span>
@@ -403,24 +400,24 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
 
               {/* Summary */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
                   Conceptual Summary
                 </h4>
-                <p className="text-sm text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+                <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800">
                   {selectedMaterial.summary}
                 </p>
               </div>
 
               {/* Key Concepts */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
                   Identified Core Concepts ({selectedMaterial.keyConcepts.length})
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {selectedMaterial.keyConcepts.map((concept, i) => (
-                    <div key={i} className="p-3 rounded-xl bg-indigo-50/40 border border-indigo-100 flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-indigo-600 shrink-0 mt-0.5" />
-                      <span className="text-xs font-medium text-slate-800 leading-snug">
+                    <div key={i} className="p-3 rounded-xl bg-indigo-50/40 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/50 flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0 mt-0.5" />
+                      <span className="text-xs font-medium text-slate-800 dark:text-slate-200 leading-snug">
                         {concept}
                       </span>
                     </div>
@@ -430,7 +427,7 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
 
               {/* Recommended Questions to Ask Tutor */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
                   Recommended Tutor Prompts
                 </h4>
                 <div className="space-y-2">
@@ -438,17 +435,17 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
                     <button
                       key={idx}
                       onClick={() => onLearnFromTopic(q)}
-                      className="w-full p-3 rounded-xl text-left bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-xs sm:text-sm font-medium text-slate-700 hover:text-indigo-900 transition-all flex items-center justify-between group"
+                      className="w-full p-3 rounded-xl text-left bg-slate-50 dark:bg-slate-800/40 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-800 hover:border-indigo-300 dark:hover:border-indigo-700 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-indigo-900 dark:hover:text-indigo-200 transition-all flex items-center justify-between group"
                     >
                       <span>{q}</span>
-                      <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 text-slate-400 dark:text-slate-500 group-hover:text-indigo-600 transition-transform group-hover:translate-x-1" />
                     </button>
                   ))}
                 </div>
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 text-slate-400">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl p-12 text-center border border-slate-200 dark:border-slate-800 text-slate-400 dark:text-slate-500">
               Select or upload a study material to view extracted concepts.
             </div>
           )}
@@ -457,36 +454,36 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
 
       {/* Paste notes modal */}
       {showPasteModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-slate-200 animate-in fade-in zoom-in-95 duration-150">
-            <h3 className="text-lg font-bold text-slate-900 mb-2">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-slate-200 dark:border-slate-800 animate-in fade-in zoom-in-95 duration-150">
+            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-2">
               Paste Lecture Notes or Text
             </h3>
-            <p className="text-xs text-slate-500 mb-4">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
               Paste rough notes, syllabus text, or textbook excerpts. Explanation Tutor will extract the foundational mental models.
             </p>
 
             {modalError && (
-              <div className="mb-3 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-start gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />
+              <div className="mb-3 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-300 text-xs flex items-start gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0 mt-0.5" />
                 <span>{modalError}</span>
               </div>
             )}
 
             <form onSubmit={handleCreateFromText} className="space-y-3">
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Topic Title</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">Topic Title</label>
                 <input
                   type="text"
                   placeholder="e.g. Chem 101 - Acid Base Equilibria"
                   value={customTitle}
                   onChange={(e) => setCustomTitle(e.target.value)}
                   disabled={isProcessing}
-                  className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-3.5 py-2 rounded-xl text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">Notes Content</label>
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">Notes Content</label>
                 <textarea
                   rows={6}
                   placeholder="Paste lecture text, formulas, or summaries here..."
@@ -494,7 +491,7 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
                   onChange={(e) => setCustomText(e.target.value)}
                   disabled={isProcessing}
                   required
-                  className="w-full px-3.5 py-2 rounded-xl text-sm border border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-sans"
+                  className="w-full px-3.5 py-2 rounded-xl text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 font-sans"
                 />
               </div>
               <div className="flex items-center justify-end gap-2 pt-2">
@@ -502,7 +499,7 @@ export const MyMaterialsView: React.FC<MyMaterialsViewProps> = ({ onLearnFromTop
                   type="button"
                   disabled={isProcessing}
                   onClick={() => setShowPasteModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 disabled:opacity-50"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-50"
                 >
                   Cancel
                 </button>

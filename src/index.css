@@ -1,16 +1,34 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer base {
+  :root {
+    --bg-page: #fafbfc;
+    --text-primary: #0f172a;
+    --card-bg: #ffffff;
+    --border-color: rgba(226, 232, 240, 0.85);
+  }
+
+  .dark {
+    --bg-page: #090d16;
+    --text-primary: #f8fafc;
+    --card-bg: #111827;
+    --border-color: rgba(51, 65, 85, 0.65);
+    color-scheme: dark;
+  }
+
   * {
-    border-color: rgba(226, 232, 240, 0.8);
+    border-color: var(--border-color);
   }
   
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #0f172a;
-    background-color: #fafbfc;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   code, pre, kbd {
@@ -71,8 +89,12 @@
   border-radius: 9999px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.35);
+}
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 116, 139, 0.45);
+  background: rgba(100, 116, 139, 0.5);
 }
 
 /* Respect user's motion preferences */

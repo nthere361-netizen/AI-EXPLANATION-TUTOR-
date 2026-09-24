@@ -3,9 +3,7 @@ import { CodeTutorResponse, ChallengeEvaluationResponse } from '../types';
 import { debugCodeWithTutor, evaluateChallenge } from '../services/tutorService';
 import { SAMPLE_CODE_TUTOR_CASES } from '../data/mockData';
 import { 
-  Code2, 
   Terminal, 
-  Play, 
   CheckCircle2, 
   AlertTriangle, 
   Sparkles, 
@@ -13,7 +11,6 @@ import {
   Check, 
   Lightbulb, 
   BookOpen, 
-  ArrowRight,
   Loader2,
   AlertCircle
 } from 'lucide-react';
@@ -106,33 +103,33 @@ export const CodeTutorView: React.FC = () => {
   return (
     <div className="w-full max-w-5xl mx-auto space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-slate-800 shadow-xs">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-purple-50 text-purple-700 border border-purple-100">
+            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-purple-50 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 border border-purple-100 dark:border-purple-800/60">
               Computational Logic Tutor
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 mt-2 tracking-tight">
               Code Tutor: Understand Why Code Breaks
             </h1>
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
               Never copy-paste blind fixes. Understand the underlying execution mechanics, memory lifecycle, and scope invariants.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-slate-500 hidden sm:inline">
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 hidden sm:inline">
               Sample Scenarios:
             </span>
             <div className="flex items-center gap-1.5">
-              {SAMPLE_CODE_TUTOR_CASES.map((item, idx) => (
+              {SAMPLE_CODE_TUTOR_CASES.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSelectCase(idx)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all ${
                     selectedCaseIdx === idx
                       ? 'bg-purple-600 text-white border-purple-600 shadow-sm'
-                      : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
+                      : 'bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
                   }`}
                 >
                   Scenario {idx + 1}
@@ -183,8 +180,8 @@ export const CodeTutorView: React.FC = () => {
 
           {/* Right Control Panel: Error symptoms & Trigger */}
           <div className="lg:col-span-4 flex flex-col justify-between space-y-4">
-            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex-1 flex flex-col">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
+            <div className="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 flex-1 flex flex-col">
+              <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
                 Observed Symptom / Error
               </label>
               <textarea
@@ -192,14 +189,14 @@ export const CodeTutorView: React.FC = () => {
                 value={errorDesc}
                 onChange={(e) => setErrorDesc(e.target.value)}
                 placeholder="What error occurred? (e.g. RecursionError: maximum recursion depth exceeded)"
-                className="w-full flex-1 p-3 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="w-full flex-1 p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
 
             <button
               onClick={handleRunAnalysis}
               disabled={isLoading || !code.trim()}
-              className="w-full py-3.5 rounded-2xl font-bold text-sm bg-purple-600 hover:bg-purple-700 active:scale-98 text-white shadow-md shadow-purple-200 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3.5 rounded-2xl font-bold text-sm bg-purple-600 hover:bg-purple-700 active:scale-98 text-white shadow-md shadow-purple-200 dark:shadow-none flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <>
@@ -218,9 +215,9 @@ export const CodeTutorView: React.FC = () => {
 
         {/* Error notification if API failed */}
         {errorText && (
-          <div className="mt-4 p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-xs sm:text-sm font-medium flex items-center justify-between animate-in fade-in">
+          <div className="mt-4 p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-300 text-xs sm:text-sm font-medium flex items-center justify-between animate-in fade-in">
             <div className="flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
               <span>{errorText}</span>
             </div>
             <button
@@ -237,31 +234,31 @@ export const CodeTutorView: React.FC = () => {
       {result && (
         <div className="space-y-5 animate-in fade-in slide-in-from-bottom-2 duration-300">
           {/* 1. WHAT'S WRONG */}
-          <div className="bg-rose-50/70 rounded-2xl p-6 sm:p-7 border border-rose-200/90 shadow-xs">
+          <div className="bg-rose-50/70 dark:bg-rose-950/30 rounded-2xl p-6 sm:p-7 border border-rose-200/90 dark:border-rose-900/50 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
-              <div className="p-1.5 rounded-lg bg-rose-100 text-rose-700 border border-rose-200">
-                <AlertTriangle className="w-4 h-4 text-rose-600" />
+              <div className="p-1.5 rounded-lg bg-rose-100 dark:bg-rose-900/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
+                <AlertTriangle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
               </div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-rose-900">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-rose-900 dark:text-rose-300">
                 What's Actually Happening
               </h3>
             </div>
-            <p className="text-sm sm:text-base font-semibold text-rose-950 leading-relaxed">
+            <p className="text-sm sm:text-base font-semibold text-rose-950 dark:text-rose-200 leading-relaxed">
               {result.whatsWrong}
             </p>
           </div>
 
           {/* 2. WHY IT HAPPENS (Computational Model) */}
-          <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-xs">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-7 border border-slate-200/90 dark:border-slate-800 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
-              <div className="p-1.5 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200">
-                <BookOpen className="w-4 h-4 text-indigo-600" />
+              <div className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-900/60">
+                <BookOpen className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200">
                 The Execution Mechanics (Why)
               </h3>
             </div>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
               {result.why}
             </p>
           </div>
@@ -291,14 +288,14 @@ export const CodeTutorView: React.FC = () => {
           </div>
 
           {/* 4. WHAT CHANGED */}
-          <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-xs">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-7 border border-slate-200/90 dark:border-slate-800 shadow-xs">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
               Explicit Structural Changes:
             </h4>
             <div className="space-y-2">
               {result.whatChanged.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -306,44 +303,44 @@ export const CodeTutorView: React.FC = () => {
           </div>
 
           {/* 5. CONCEPT MASTERY CARD */}
-          <div className="bg-purple-50/60 rounded-2xl p-6 sm:p-7 border border-purple-200 shadow-xs">
+          <div className="bg-purple-50/60 dark:bg-purple-950/30 rounded-2xl p-6 sm:p-7 border border-purple-200 dark:border-purple-900/50 shadow-xs">
             <div className="flex items-center gap-2 mb-2">
-              <div className="p-1.5 rounded-lg bg-purple-100 text-purple-700">
-                <Lightbulb className="w-4 h-4 text-purple-600" />
+              <div className="p-1.5 rounded-lg bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300">
+                <Lightbulb className="w-4 h-4 text-purple-600 dark:text-purple-400" />
               </div>
-              <h3 className="text-xs font-bold uppercase tracking-wider text-purple-900">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-purple-900 dark:text-purple-300">
                 Universal Concept: {result.learnThisConcept.concept}
               </h3>
             </div>
-            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed mb-3">
+            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
               {result.learnThisConcept.explanation}
             </p>
-            <div className="p-3.5 rounded-xl bg-purple-100/70 border border-purple-200 text-xs sm:text-sm font-semibold text-purple-950 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-purple-600 shrink-0" />
+            <div className="p-3.5 rounded-xl bg-purple-100/70 dark:bg-purple-900/50 border border-purple-200 dark:border-purple-800 text-xs sm:text-sm font-semibold text-purple-950 dark:text-purple-200 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-purple-600 dark:bg-purple-400 shrink-0" />
               <span>{result.learnThisConcept.ruleOfThumb}</span>
             </div>
           </div>
 
           {/* 6. TRY IT YOURSELF (Interactive Challenge with Rubric Evaluation) */}
-          <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/90 shadow-xs">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 sm:p-7 border border-slate-200/90 dark:border-slate-800 shadow-xs">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-lg bg-teal-50 text-teal-700 border border-teal-200">
+                <div className="p-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 border border-teal-200 dark:border-teal-900/60">
                   <Terminal className="w-4 h-4" />
                 </div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-teal-800">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300">
                   Try It Yourself: Mini Challenge
                 </h3>
               </div>
               <button
                 onClick={() => setShowSolution(!showSolution)}
-                className="text-xs font-semibold text-slate-500 hover:text-slate-800 underline"
+                className="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 underline"
               >
                 {showSolution ? 'Hide Solution' : 'Reveal Reference Solution'}
               </button>
             </div>
 
-            <p className="text-sm font-semibold text-slate-800 mb-3">
+            <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3">
               {result.tryItYourself.prompt}
             </p>
 
@@ -373,8 +370,8 @@ export const CodeTutorView: React.FC = () => {
 
             {/* Evaluation Error */}
             {evalError && (
-              <div className="mt-3 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-xs flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+              <div className="mt-3 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
                 <span>{evalError}</span>
               </div>
             )}
@@ -383,18 +380,18 @@ export const CodeTutorView: React.FC = () => {
             {evalResult && (
               <div className={`mt-4 p-4 rounded-xl border text-xs sm:text-sm animate-in fade-in ${
                 evalResult.isCorrect 
-                  ? 'bg-emerald-50 border-emerald-300 text-emerald-950' 
-                  : 'bg-amber-50 border-amber-300 text-amber-950'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-300 dark:border-emerald-700 text-emerald-950 dark:text-emerald-100' 
+                  : 'bg-amber-50 dark:bg-amber-950/50 border-amber-300 dark:border-amber-700 text-amber-950 dark:text-amber-100'
               }`}>
                 <div className="flex items-center gap-2 font-bold mb-1.5">
                   {evalResult.isCorrect ? (
                     <>
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                       <span>Challenge Solved — {evalResult.conceptMastery}</span>
                     </>
                   ) : (
                     <>
-                      <AlertTriangle className="w-4 h-4 text-amber-600" />
+                      <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
                       <span>Needs Adjustment — {evalResult.conceptMastery}</span>
                     </>
                   )}
@@ -405,7 +402,7 @@ export const CodeTutorView: React.FC = () => {
                 </p>
 
                 {evalResult.detectedIssues && evalResult.detectedIssues.length > 0 && (
-                  <div className="mt-2 pt-2 border-t border-amber-200/80">
+                  <div className="mt-2 pt-2 border-t border-amber-200/80 dark:border-amber-800/80">
                     <span className="font-semibold block mb-1 text-[11px] uppercase tracking-wider">
                       Identified gaps:
                     </span>
@@ -420,8 +417,8 @@ export const CodeTutorView: React.FC = () => {
             )}
 
             {showSolution && (
-              <div className="mt-4 p-4 rounded-xl bg-slate-100 border border-slate-200 font-mono text-xs text-slate-800">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+              <div className="mt-4 p-4 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-xs text-slate-800 dark:text-slate-200">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
                   Reference Solution:
                 </div>
                 <pre>{result.tryItYourself.solutionCode}</pre>

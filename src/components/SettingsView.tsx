@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { UserPreferences, ExplanationLevel } from '../types';
-import { Settings, Volume2, Sliders, Sparkles, RefreshCcw, ShieldCheck, Zap, Check } from 'lucide-react';
+import { Settings, Sparkles, RefreshCcw, Zap, Check, Sun, Moon } from 'lucide-react';
 
 interface SettingsViewProps {
   preferences: UserPreferences;
   onUpdatePreferences: (updated: Partial<UserPreferences>) => void;
   onResetData: () => void;
   onLaunchDemoPreset: (topic: string) => void;
+  theme?: 'light' | 'dark';
+  onToggleTheme?: () => void;
 }
 
 export const SettingsView: React.FC<SettingsViewProps> = ({
@@ -14,6 +16,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   onUpdatePreferences,
   onResetData,
   onLaunchDemoPreset,
+  theme = 'light',
+  onToggleTheme
 }) => {
   const [resetDone, setResetDone] = useState(false);
 
@@ -22,19 +26,20 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
     setResetDone(true);
     setTimeout(() => setResetDone(false), 3000);
   };
+
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6">
       {/* Header */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs">
-        <div className="flex items-center gap-3 pb-6 border-b border-slate-100">
-          <div className="p-2.5 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-100">
+      <div className="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-slate-800 shadow-xs">
+        <div className="flex items-center gap-3 pb-6 border-b border-slate-100 dark:border-slate-800">
+          <div className="p-2.5 rounded-2xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-100 dark:border-indigo-900/60">
             <Settings className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">
               Tutor Preferences & Configuration
             </h1>
-            <p className="text-sm text-slate-600 mt-0.5">
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-0.5">
               Personalize explanation depth, speech speeds, and presentation settings.
             </p>
           </div>
@@ -42,9 +47,65 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
 
         {/* Options Stack */}
         <div className="mt-6 space-y-6">
+          {/* Theme Mode Preference */}
+          {onToggleTheme && (
+            <div>
+              <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-2">
+                Interface Theme
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (theme !== 'light') onToggleTheme();
+                  }}
+                  className={`p-4 rounded-2xl border text-left transition-all flex items-center justify-between ${
+                    theme === 'light'
+                      ? 'bg-indigo-50/80 border-indigo-300 ring-2 ring-indigo-400/20 shadow-xs'
+                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-amber-50 text-amber-600 border border-amber-200">
+                      <Sun className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-sm font-bold block text-slate-900 dark:text-slate-100">Light Mode</span>
+                      <span className="text-xs text-slate-500">Crisp, paper-like reading contrast</span>
+                    </div>
+                  </div>
+                  {theme === 'light' && <Check className="w-4 h-4 text-indigo-600" />}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (theme !== 'dark') onToggleTheme();
+                  }}
+                  className={`p-4 rounded-2xl border text-left transition-all flex items-center justify-between ${
+                    theme === 'dark'
+                      ? 'bg-indigo-950/60 border-indigo-500 ring-2 ring-indigo-500/20 shadow-xs'
+                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-indigo-950/80 text-indigo-300 border border-indigo-800">
+                      <Moon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="text-sm font-bold block text-slate-900 dark:text-slate-100">Dark Mode</span>
+                      <span className="text-xs text-slate-400">Dimmed ambient palette for night study</span>
+                    </div>
+                  </div>
+                  {theme === 'dark' && <Check className="w-4 h-4 text-indigo-400" />}
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* 1. Default Depth */}
-          <div>
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-2">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-2">
               Default Explanation Depth
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -58,14 +119,14 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                   onClick={() => onUpdatePreferences({ defaultLevel: lvl.id as ExplanationLevel })}
                   className={`p-4 rounded-2xl border text-left transition-all ${
                     preferences.defaultLevel === lvl.id
-                      ? 'bg-indigo-50/80 border-indigo-300 ring-2 ring-indigo-400/20 shadow-xs'
-                      : 'bg-white border-slate-200 hover:border-slate-300'
+                      ? 'bg-indigo-50/80 dark:bg-indigo-950/60 border-indigo-300 dark:border-indigo-700 ring-2 ring-indigo-400/20 shadow-xs'
+                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600'
                   }`}
                 >
-                  <span className={`text-sm font-bold block ${preferences.defaultLevel === lvl.id ? 'text-indigo-950' : 'text-slate-800'}`}>
+                  <span className={`text-sm font-bold block ${preferences.defaultLevel === lvl.id ? 'text-indigo-950 dark:text-indigo-300' : 'text-slate-800 dark:text-slate-200'}`}>
                     {lvl.title}
                   </span>
-                  <span className="text-xs text-slate-500 mt-1 block leading-snug">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 mt-1 block leading-snug">
                     {lvl.sub}
                   </span>
                 </button>
@@ -74,12 +135,12 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
 
           {/* 2. Voice Audio Speed */}
-          <div className="pt-4 border-t border-slate-100">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
+              <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
                 Speech Synthesis Speed
               </label>
-              <span className="text-xs font-mono font-bold text-indigo-600">
+              <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400">
                 {preferences.speechSpeed}x
               </span>
             </div>
@@ -91,7 +152,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                   className={`px-4 py-2 rounded-xl text-xs font-bold border transition-all ${
                     preferences.speechSpeed === speed
                       ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs'
-                      : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                      : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
                   }`}
                 >
                   {speed}x
@@ -101,8 +162,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
 
           {/* 3. Explanation Style Emphasis */}
-          <div className="pt-4 border-t border-slate-100">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-2">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
+            <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-2">
               Pedagogical Emphasis
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -116,24 +177,24 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                   onClick={() => onUpdatePreferences({ explanationStyle: style.id as any })}
                   className={`p-3.5 rounded-xl border text-left transition-all ${
                     preferences.explanationStyle === style.id
-                      ? 'bg-indigo-50 border-indigo-300 ring-1 ring-indigo-400 font-semibold text-indigo-950'
-                      : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
+                      ? 'bg-indigo-50 dark:bg-indigo-950/60 border-indigo-300 dark:border-indigo-700 ring-1 ring-indigo-400 font-semibold text-indigo-950 dark:text-indigo-300'
+                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-600'
                   }`}
                 >
                   <span className="text-xs font-bold block">{style.title}</span>
-                  <span className="text-[11px] text-slate-500">{style.desc}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400">{style.desc}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* 4. Motion & Accessibility Settings */}
-          <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+          <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block">
+              <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 block">
                 Reduced Motion
               </label>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Minimizes animations, transitions, and pulsing effects across the workspace.
               </p>
             </div>
@@ -142,7 +203,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${
                 preferences.reducedMotion
                   ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs'
-                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                  : 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700'
               }`}
             >
               {preferences.reducedMotion ? 'Enabled' : 'Disabled'}
@@ -199,21 +260,21 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
       </div>
 
       {/* Reset Cache & History */}
-      <div className="p-6 bg-white rounded-3xl border border-slate-200/90 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-6 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h4 className="text-sm font-bold text-slate-900">Reset Local Session Data</h4>
-          <p className="text-xs text-slate-500">Clears recent queries, saved bookmarks, and restores default sample study materials.</p>
+          <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100">Reset Local Session Data</h4>
+          <p className="text-xs text-slate-500 dark:text-slate-400">Clears recent queries, saved bookmarks, and restores default sample study materials.</p>
         </div>
         <div className="flex items-center gap-3">
           {resetDone && (
-            <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 flex items-center gap-1.5 animate-in fade-in">
+            <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1.5 rounded-xl border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5 animate-in fade-in">
               <Check className="w-3.5 h-3.5" />
               <span>Data Reset</span>
             </span>
           )}
           <button
             onClick={handleReset}
-            className="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-colors flex items-center gap-1.5 shrink-0"
+            className="px-4 py-2 rounded-xl text-xs font-semibold bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900 transition-colors flex items-center gap-1.5 shrink-0"
           >
             <RefreshCcw className="w-3.5 h-3.5" />
             <span>Reset Session</span>

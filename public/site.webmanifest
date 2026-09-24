@@ -1,0 +1,26 @@
+{
+  "name": "Explanation Tutor",
+  "short_name": "ExplainTutor",
+  "description": "AI that helps people understand, not just AI that gives answers. Master complex concepts with first-principles explanations, visual diagrams, and real-world analogies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

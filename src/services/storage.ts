@@ -1,4 +1,4 @@
-import { ExplanationData, ExplanationLevel, StudyMaterial, UserPreferences } from '../types';
+import { ExplanationData, ExplanationLevel, StudyMaterial, UserPreferences, PersonalNote } from '../types';
 import { SAMPLE_STUDY_MATERIALS, PRESET_EXPLANATIONS } from '../data/mockData';
 
 const STORAGE_KEYS = {
@@ -7,7 +7,9 @@ const STORAGE_KEYS = {
   MATERIALS: 'explanation_tutor_materials_v1',
   PREFERENCES: 'explanation_tutor_preferences_v1',
   ACTIVE_EXPLANATION: 'explanation_tutor_active_explanation_v1',
-  COMPLETED_NODES: 'explanation_tutor_completed_nodes_v1'
+  COMPLETED_NODES: 'explanation_tutor_completed_nodes_v1',
+  THEME: 'explanation_tutor_theme_v1',
+  NOTES: 'explanation_tutor_personal_notes_v1'
 } as const;
 
 export interface StoredQuestion {
@@ -29,7 +31,8 @@ export const DEFAULT_PREFERENCES: UserPreferences = {
   speechSpeed: 1.0,
   voiceEnabled: true,
   explanationStyle: 'analogy',
-  reducedMotion: false
+  reducedMotion: false,
+  theme: 'light'
 };
 
 const DEFAULT_QUESTIONS: StoredQuestion[] = [
@@ -199,7 +202,86 @@ export function clearStoredSession(): void {
     window.localStorage.removeItem(STORAGE_KEYS.MATERIALS);
     window.localStorage.removeItem(STORAGE_KEYS.ACTIVE_EXPLANATION);
     window.localStorage.removeItem(STORAGE_KEYS.COMPLETED_NODES);
+    window.localStorage.removeItem(STORAGE_KEYS.NOTES);
   } catch (e) {
     console.warn('Failed to clear session data from localStorage:', e);
   }
 }
+
+export function loadStoredPersonalNotes(): Record<string, PersonalNote> {
+  if (!isLocalStorageAvailable()) return {};
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEYS.NOTES);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return typeof parsed === 'object' && parsed !== null ? parsed : {};
+  } catch (e) {
+    console.warn('Failed to parse personal notes from localStorage:', e);
+    return {};
+  }
+}
+
+export function loadPersonalNoteForTopic(topic: string): PersonalNote | null {
+  if (!topic) return null;
+  const allNotes = loadStoredPersonalNotes();
+  const key = topic.trim().toLowerCase();
+  return allNotes[key] || null;
+}
+
+export function savePersonalNoteForTopic(topic: string, text: string): PersonalNote {
+  const allNotes = loadStoredPersonalNotes();
+  const key = topic.trim().toLowerCase();
+  const updatedNote: PersonalNote = {
+    topic: topic.trim(),
+    text,
+    updatedAt: Date.now()
+  };
+  allNotes[key] = updatedNote;
+  if (isLocalStorageAvailable()) {
+    try {
+      window.localStorage.setItem(STORAGE_KEYS.NOTES, JSON.stringify(allNotes));
+    } catch (e) {
+      console.warn('Failed to save personal notes to localStorage:', e);
+    }
+  }
+  return updatedNote;
+}
+
+export function deletePersonalNoteForTopic(topic: string): void {
+  const allNotes = loadStoredPersonalNotes();
+  const key = topic.trim().toLowerCase();
+  if (allNotes[key]) {
+    delete allNotes[key];
+    if (isLocalStorageAvailable()) {
+      try {
+        window.localStorage.setItem(STORAGE_KEYS.NOTES, JSON.stringify(allNotes));
+      } catch (e) {
+        console.warn('Failed to delete personal note from localStorage:', e);
+      }
+    }
+  }
+}
+
+export function loadStoredTheme(): 'light' | 'dark' {
+  if (!isLocalStorageAvailable()) return 'light';
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEYS.THEME);
+    if (raw === 'dark' || raw === 'light') return raw;
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  } catch {
+    return 'light';
+  }
+}
+
+export function saveStoredTheme(theme: 'light' | 'dark'): void {
+  if (!isLocalStorageAvailable()) return;
+  try {
+    window.localStorage.setItem(STORAGE_KEYS.THEME, theme);
+  } catch (e) {
+    console.warn('Failed to save theme to localStorage:', e);
+  }
+}
+
