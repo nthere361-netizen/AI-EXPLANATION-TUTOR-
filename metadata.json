@@ -1,0 +1,6 @@
+{
+  "name": "Explanation Tutor",
+  "description": "AI that helps people understand, not just AI that gives answers. Master complex concepts through simplified explanations, visual diagrams, real-world examples, and interactive practice.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
